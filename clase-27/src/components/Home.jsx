@@ -1,30 +1,26 @@
 import ProductList from "./ProductList";
 import { useProducts } from "../hooks/useProducts";
+import Loading from "./ui/Loading";
+import ErrorMessage from "./ui/ErrorMessage";
+import SuccessMessage from "./ui/SuccessMessage";
 
 function Home() {
-  const { products, setError, success, loading, error, handleDelete } =
+  const { products, success, loading, error, handleDelete } =
     useProducts();
 
   if (loading) {
-    return <p className="message">Cargando productos...</p>;
+    return <Loading text="Cargando productos..." />;
   }
 
   if (error) {
-    return (
-      <div>
-        <p className="error">{error}</p>
-        <button type="button" onClick={() => setError(null)}>
-          Recargar
-        </button>
-      </div>
-    );
+    return <ErrorMessage error={error} />;
   }
 
   return (
     <section>
       <h2>Listado de productos</h2>
 
-      {success && <p className="success">{success}</p>}
+      {success && <SuccessMessage message={success} />}
 
       {products.length == 0 && (
         <p className="message">No hay productos disponibles</p>

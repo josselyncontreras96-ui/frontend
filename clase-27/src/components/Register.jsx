@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { registerUser } from "../services/AuthService";
+import SuccessMessage from "./ui/SuccessMessage";
 
 const initialState = {
   email: "",
@@ -59,7 +60,7 @@ function Register() {
     };
 
     try {
-      await registerUser(user)
+      await registerUser(user);
 
       setError(null);
       setSuccess("Cuenta creada correctamente");
@@ -89,7 +90,7 @@ function Register() {
       </h2>
       <p>Regístrate para poder acceder a la aplicación.</p>
 
-      {success && <p className="success">{success}</p>}
+      {success && <SuccessMessage message={success} />}
 
       <form className="auth-form" onSubmit={handleSubmit}>
         <div className="form-group">

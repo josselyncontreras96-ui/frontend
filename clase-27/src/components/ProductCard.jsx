@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import styles from "./ProductCard.module.css";
 
 function ProductCard({ product, handleDelete }) {
   const { user } = useAuth();
 
   return (
-    <article className="product-card">
-      <h3>{product.name}</h3>
-      <p>$ {product.price}</p>
+    <article className={styles.card}>
+      <h3 className={styles.title}>{product.name}</h3>
+      <p className={styles.price}>$ {product.price}</p>
 
-      <div className="card-actions">
-        <Link to={"/products/" + product._id} className="button">
+      <div className={styles.actions}>
+        <Link to={"/products/" + product._id} className="button secondary">
           Detalle
         </Link>
 
@@ -19,7 +20,13 @@ function ProductCard({ product, handleDelete }) {
             <Link to={`/products/${product._id}/edit`} className="button">
               Editar
             </Link>
-            <button onClick={() => handleDelete(product._id)}>Eliminar</button>
+            <button
+              type="button"
+              className="danger"
+              onClick={() => handleDelete(product._id)}
+            >
+              Eliminar
+            </button>
           </>
         )}
       </div>

@@ -19,6 +19,7 @@ export const useProducts = () => {
 
       setProducts(data);
 
+      setSuccess("Productos cargados correctamente");
       setError(null);
     } catch (error) {
       setError(error.message);
